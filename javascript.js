@@ -7,10 +7,22 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-function addBook(title, author, pages, isRead) {
+function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
 }
+
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
+addBookToLibrary(
+  "Harry Potter and the Philosopher's Stone",
+  "J.K. Rowling",
+  223,
+  true
+);
+
+addBookToLibrary("Dune", "Frank Herbert", 412, false);
+
+addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", 1178, true);
 
 function displayBooks() {
   const libraryDisplay = document.getElementById("library-display");
@@ -30,3 +42,4 @@ function displayBooks() {
     libraryDisplay.appendChild(bookCard);
   });
 }
+displayBooks();
