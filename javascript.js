@@ -10,19 +10,8 @@ function Book(title, author, pages, isRead) {
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
+  displayBooks();
 }
-
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
-addBookToLibrary(
-  "Harry Potter and the Philosopher's Stone",
-  "J.K. Rowling",
-  223,
-  true
-);
-
-addBookToLibrary("Dune", "Frank Herbert", 412, false);
-
-addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", 1178, true);
 
 function displayBooks() {
   const libraryDisplay = document.getElementById("library-display");
@@ -42,4 +31,32 @@ function displayBooks() {
     libraryDisplay.appendChild(bookCard);
   });
 }
+
+document.getElementById("book-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const pages = parseInt(document.getElementById("pages").value, 10);
+  const isRead =
+    document.querySelector('input[name="read-status"]:checked').value ===
+    "read";
+
+  addBookToLibrary(title, author, pages, isRead);
+
+  event.target.reset();
+});
+
 displayBooks();
+
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
+addBookToLibrary(
+  "Harry Potter and the Philosopher's Stone",
+  "J.K. Rowling",
+  223,
+  true
+);
+
+addBookToLibrary("Dune", "Frank Herbert", 412, false);
+
+addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", 1178, true);

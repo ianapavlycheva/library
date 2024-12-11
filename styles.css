@@ -1,3 +1,8 @@
+#library-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
 .book-card {
   border: 1px solid #000;
   padding: 10px;
