@@ -26,10 +26,20 @@ function displayBooks() {
       <p>Author: ${book.author}</p>
       <p>Pages: ${book.pages}</p>
       <p>Read: ${book.isRead ? "Yes" : "No"}</p>
+       <button class="remove-btn" data-index="${index}">Remove</button>
     `;
 
     libraryDisplay.appendChild(bookCard);
   });
+
+  const removeButtons = document.querySelectorAll(".remove-btn");
+  removeButtons.forEach((button) =>
+    button.addEventListener("click", (e) => {
+      const bookIndex = e.target.dataset.index;
+      myLibrary.splice(bookIndex, 1);
+      displayBooks();
+    })
+  );
 }
 
 document.getElementById("book-form").addEventListener("submit", (event) => {
