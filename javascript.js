@@ -13,6 +13,19 @@ function addBookToLibrary(title, author, pages, isRead) {
   displayBooks();
 }
 
+document.getElementById("toggle-form-btn").addEventListener("click", () => {
+  const formContainer = document.getElementById("form-container");
+  const toggleButton = document.getElementById("toggle-form-btn");
+
+  if (formContainer.style.display === "none" || !formContainer.style.display) {
+    formContainer.style.display = "block";
+    toggleButton.textContent = "Close Form";
+  } else {
+    formContainer.style.display = "none";
+    toggleButton.textContent = "Add Book";
+  }
+});
+
 function displayBooks() {
   const libraryDisplay = document.getElementById("library-display");
   libraryDisplay.innerHTML = "";
