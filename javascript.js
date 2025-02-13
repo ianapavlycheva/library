@@ -7,10 +7,55 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
+Book.prototype.toggleReadStatus = function () {
+  this.isRead = !this.isRead;
+};
+
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
   displayBooks();
+}
+
+function displayBooks() {
+  const libraryDisplay = document.getElementById("library-display");
+  libraryDisplay.innerHTML = "";
+
+  myLibrary.forEach((book, index) => {
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("book-card");
+
+    bookCard.innerHTML = `
+      <h3>${book.title}</h3>
+      <p>Author: ${book.author}</p>
+      <p>Pages: ${book.pages}</p>
+      <p>Read: <span class="read-status">${
+        book.isRead ? "Yes" : "No"
+      }</span></p>
+      <button class="toggle-read-btn" data-index="${index}">
+        ${book.isRead ? "Read" : "Unread"}
+      </button>
+       <button class="remove-btn" data-index="${index}">Remove</button>
+    `;
+
+    libraryDisplay.appendChild(bookCard);
+  });
+
+  document.querySelectorAll(".toggle-read-btn").forEach((button) =>
+    button.addEventListener("click", (e) => {
+      const bookIndex = e.target.dataset.index;
+      myLibrary[bookIndex].toggleReadStatus();
+      displayBooks();
+    })
+  );
+
+  document.querySelectorAll(".remove-btn").forEach((button) =>
+    button.addEventListener("click", (e) => {
+      const bookIndex = e.target.dataset.index;
+      myLibrary.splice(bookIndex, 1);
+      displayBooks();
+    })
+  );
 }
 
 document.getElementById("toggle-form-btn").addEventListener("click", () => {
@@ -25,36 +70,6 @@ document.getElementById("toggle-form-btn").addEventListener("click", () => {
     toggleButton.textContent = "Add Book";
   }
 });
-
-function displayBooks() {
-  const libraryDisplay = document.getElementById("library-display");
-  libraryDisplay.innerHTML = "";
-
-  myLibrary.forEach((book, index) => {
-    const bookCard = document.createElement("div");
-    bookCard.classList.add("book-card");
-
-    bookCard.innerHTML = `
-      <h3>${book.title}</h3>
-      <p>Author: ${book.author}</p>
-      <p>Pages: ${book.pages}</p>
-      <p>Read: ${book.isRead ? "Yes" : "No"}</p>
-       <button class="remove-btn" data-index="${index}">Remove</button>
-    `;
-
-    libraryDisplay.appendChild(bookCard);
-  });
-
-  const removeButtons = document.querySelectorAll(".remove-btn");
-  removeButtons.forEach((button) =>
-    button.addEventListener("click", (e) => {
-      const bookIndex = e.target.dataset.index;
-      myLibrary.splice(bookIndex, 1);
-      displayBooks();
-    })
-  );
-}
-
 document.getElementById("book-form").addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -72,6 +87,7 @@ document.getElementById("book-form").addEventListener("submit", (event) => {
 
 displayBooks();
 
+// Initial Books
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
 addBookToLibrary(
   "Harry Potter and the Philosopher's Stone",
