@@ -64,12 +64,16 @@ document.getElementById("toggle-form-btn").addEventListener("click", () => {
 
   if (formContainer.style.display === "none" || !formContainer.style.display) {
     formContainer.style.display = "block";
-    toggleButton.textContent = "Close Form";
   } else {
     formContainer.style.display = "none";
     toggleButton.textContent = "Add Book";
   }
 });
+
+document.getElementById("close-form-btn").addEventListener("click", () => {
+  document.getElementById("form-container").style.display = "none";
+});
+
 document.getElementById("book-form").addEventListener("submit", (event) => {
   event.preventDefault();
 
