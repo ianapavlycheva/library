@@ -170,13 +170,16 @@ button {
 #form-container {
   display: none;
   position: fixed;
+  width: 350px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 110);
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 10;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .close-icon {
